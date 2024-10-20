@@ -12,6 +12,7 @@ public class ConsumoAPI {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
+       // System.out.println(url);
         HttpResponse<String> response = null;
         try {
             response = client
