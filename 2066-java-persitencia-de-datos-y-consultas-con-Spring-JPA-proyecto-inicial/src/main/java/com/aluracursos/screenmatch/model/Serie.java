@@ -2,18 +2,37 @@ package com.aluracursos.screenmatch.model;
 
 import com.aluracursos.screenmatch.service.ConsultaChatGPT;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.persistence.*; //ojo para declarar las @Id,etc.
 
 import javax.management.monitor.StringMonitor;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalDouble;
 
+
+@Entity
+@Table(name = "series")
 public class Serie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+    @Column(unique = true)
     private String titulo;
     private Integer totalTemporadas;
     private Double evaluacion;
     private String poster;
+
+    @Enumerated(EnumType.STRING)
     private Categoria genero;
     private String actores;
     private String sinopsis;
+
+   @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Episodio> episodios;
+
+    public Serie(){ //COnstructor predeterminado todas las entindades deben tener uno. predeterminado
+
+    }
 
     public Serie(DatosSerie datosSerie) {
         this.titulo = datosSerie.titulo();
@@ -24,7 +43,10 @@ public class Serie {
         this.genero = Categoria.fromString(datosSerie.genero().split(",")[0].trim());
         this.actores =datosSerie.actores();
         this.sinopsis = datosSerie.sinopsis();
+
+        //OPcional chtgpt
         //this.sinopsis = ConsultaChatGPT.obtenerTraduccion( datosSerie.sinopsis());
+
 
 
     }
@@ -38,7 +60,17 @@ public class Serie {
                 ", evaluacion=" + evaluacion +
                 ", poster='" + poster + '\'' +
                 ", actores='" + actores + '\'' +
-                ", sinopsis='" + sinopsis + '\'';
+                ", sinopsis='" + sinopsis + '\''+
+                ", Episodios='" + episodios;
+
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 
     public String getTitulo() {
@@ -95,5 +127,14 @@ public class Serie {
 
     public void setSinopsis(String sinopsis) {
         this.sinopsis = sinopsis;
+    }
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(e->e.setSerie(this));
+        this.episodios = episodios;
     }
 }
