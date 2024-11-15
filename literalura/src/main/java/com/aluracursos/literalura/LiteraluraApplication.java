@@ -1,6 +1,7 @@
 package com.aluracursos.literalura;
 
 import com.aluracursos.literalura.principal.Principal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 
 
 
+	@Autowired //permite la inyeccion de dependencias por parte de spring
 
 	public static void main(String[] args) {
 		SpringApplication.run(LiteraluraApplication.class, args);
