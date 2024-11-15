@@ -1,4 +1,9 @@
 package com.aluracursos.literalura.model;
 
-public record DatosAutor() {
+import com.fasterxml.jackson.annotation.JsonAlias;
+
+public record DatosAutor(
+
+
+) {
 }
