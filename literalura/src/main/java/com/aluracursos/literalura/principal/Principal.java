@@ -51,9 +51,14 @@ public class Principal {
 
         List<DatosAutor> autor = libro.stream().flatMap(a->a.autor().stream()
 
+
         ).collect(Collectors.toList());
 
         System.out.println("Probadno stream con autor"+autor.getFirst());
+
+        Autor autor2 = new Autor(autor.getFirst());
+
+        System.out.println("Veamos la clase"+autor2.getNombre()+" "+autor2.getFechaNacimiento());
 
 
 
