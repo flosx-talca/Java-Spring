@@ -4,6 +4,7 @@ import com.aluracursos.literalura.service.ConsumoApi;
 import com.aluracursos.literalura.service.ConvierteDatos;
 
 import java.awt.image.SinglePixelPackedSampleModel;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -51,10 +52,12 @@ public class Principal {
 
         List<DatosAutor> autor = libro.stream().flatMap(a->a.autor().stream()
 
-
         ).collect(Collectors.toList());
 
         System.out.println("Probadno stream con autor"+autor.getFirst());
+
+         Optional<List<Autor>> datosAutorOptional = libro.stream().flatMap(a->a.autor().stream())
+                .filter(e-> e.nombre().contains(busqueda.toUpperCase())).collect(Collectors.toList()));
 
         Autor autor2 = new Autor(autor.getFirst());
 
