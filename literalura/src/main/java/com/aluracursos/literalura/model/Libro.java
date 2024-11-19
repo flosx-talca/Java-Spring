@@ -1,10 +1,32 @@
 package com.aluracursos.literalura.model;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Libro {
 
     private String titulo;
-    private String idiomas;
-    private Integer numeroDescargas;
+    private List<Autor> autor;
+    private Long numeroDescargas;
+
+    public Libro() {
+    }
+
+    public Libro(DatosLibro datosLibro) {
+        this.titulo = datosLibro.titulo();
+        this.numeroDescargas = datosLibro.numeroDescargas();
+
+        //this.idiomas = datosLibro.idiomas();
+        //this.numeroDescargas = datosLibro.numeroDescargas();
+    }
+
+    public List<Autor> getAutor() {
+        return autor;
+    }
+
+    public void setAutor(List<Autor> autor) {
+        this.autor = autor;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -14,19 +36,13 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public String getIdiomas() {
-        return idiomas;
-    }
 
-    public void setIdiomas(String idiomas) {
-        this.idiomas = idiomas;
-    }
 
-    public Integer getNumeroDescargas() {
+    public Long getNumeroDescargas() {
         return numeroDescargas;
     }
 
-    public void setNumeroDescargas(Integer numeroDescargas) {
+    public void setNumeroDescargas(Long numeroDescargas) {
         this.numeroDescargas = numeroDescargas;
     }
 }

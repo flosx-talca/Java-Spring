@@ -6,6 +6,14 @@ public class Autor {
     private Integer fechaNacimiento;
     private Integer fechaDefuncion;
 
+    public Autor(){}
+    public Autor(DatosAutor datosAutor){
+        this.nombre = datosAutor.nombre();
+        this.fechaNacimiento = datosAutor.fechaNacimiento();
+        this.fechaDefuncion = datosAutor.fechaDefuncion();
+
+    }
+
 
     public String getNombre() {
         return nombre;

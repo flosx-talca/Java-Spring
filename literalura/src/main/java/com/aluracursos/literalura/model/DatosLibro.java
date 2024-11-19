@@ -1,4 +1,18 @@
 package com.aluracursos.literalura.model;
 
-public record DatosLibro() {
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record DatosLibro(
+
+
+        @JsonAlias("title") String titulo,
+        @JsonAlias("authors") List <DatosAutor> autor,
+        @JsonAlias("download_count") Long numeroDescargas
+) {
+
 }
