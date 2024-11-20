@@ -5,6 +5,7 @@ import com.aluracursos.literalura.repository.LibroRepository;
 import com.aluracursos.literalura.service.ConsumoApi;
 import com.aluracursos.literalura.service.ConvierteDatos;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import static java.util.Locale.filter;
@@ -68,6 +69,8 @@ public class Principal {
            autorRepository.save(autor);
            libro.setAutor(autor);
            libroRepository.save(libro);
+           List<Libro> libro2 = Arrays.asList(libro);
+           //autor.setLibro(libro2);
            // List<Autor> listaAutor = Arrays.asList(autor);
             //libro.setAutor(listaAutor);
             //System.out.println(libro.getAutor().getFirst().getNombre());

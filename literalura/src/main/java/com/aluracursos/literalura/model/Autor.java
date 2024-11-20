@@ -62,10 +62,17 @@ public class Autor {
         this.fechaDefuncion = fechaDefuncion;
     }
 
+    public List<Libro> getLibro() {
+        return libro;
+    }
+
+  /*  public void setLibro(List<Libro> libro) {
+        this.libro = libro;
+    }
 
     public String toString() {
         return (" Nombre: %s Fecha Nac: %d Fecha Fall: %d".formatted(nombre, fechaNacimiento, fechaNacimiento));
-    }
+    }*/
 
 }
 
