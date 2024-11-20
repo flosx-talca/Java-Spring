@@ -15,6 +15,8 @@ public class Autor {
     }
 
 
+
+
     public String getNombre() {
         return nombre;
     }
@@ -38,6 +40,11 @@ public class Autor {
     public void setFechaDefuncion(Integer fechaDefuncion) {
         this.fechaDefuncion = fechaDefuncion;
     }
+
+    public String toString() {
+        return (" Nombre: %s Fecha Nac: %d Fecha Fall: %d".formatted(nombre, fechaNacimiento, fechaNacimiento));
+    }
+
 }
 
 
