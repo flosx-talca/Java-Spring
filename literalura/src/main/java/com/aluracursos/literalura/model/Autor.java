@@ -1,10 +1,24 @@
 package com.aluracursos.literalura.model;
+import com.aluracursos.literalura.repository.AutorRepository;
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
+@Table(name = "autores")
 public class Autor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+    private Long id;
     private String nombre;
     private Integer fechaNacimiento;
     private Integer fechaDefuncion;
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Libro> libro;
+    //private Libro libro;
+
+
 
     public Autor(){}
     public Autor(DatosAutor datosAutor){

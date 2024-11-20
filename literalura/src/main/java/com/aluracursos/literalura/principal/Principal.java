@@ -1,5 +1,7 @@
 package com.aluracursos.literalura.principal;
 import com.aluracursos.literalura.model.*;
+import com.aluracursos.literalura.repository.AutorRepository;
+import com.aluracursos.literalura.repository.LibroRepository;
 import com.aluracursos.literalura.service.ConsumoApi;
 import com.aluracursos.literalura.service.ConvierteDatos;
 
@@ -8,6 +10,8 @@ import java.util.*;
 import static java.util.Locale.filter;
 
 public class Principal {
+    private final LibroRepository libroRepository;
+    private final AutorRepository autorRepository;
     private Scanner teclado = new Scanner(System.in);
     private ConsumoApi consumoApi = new ConsumoApi();
     private DatosLibro datosLibro;
@@ -17,6 +21,12 @@ public class Principal {
     private final String URL_BASE = "https://gutendex.com/books/?search=dickens%20great";
     private ConvierteDatos conversor = new ConvierteDatos();
     private Resultado dataResultado;
+
+    public Principal(LibroRepository libroRepository, AutorRepository autorRepository) {
+            this.libroRepository =libroRepository;
+
+            this.autorRepository = autorRepository;
+    }
 
     // para la interfaz SerieRepositoryn (Inyeccion de dependencia) lo crea intelli
 
@@ -30,6 +40,8 @@ public class Principal {
         System.out.println("Prueba de JSON: "+json);
 
         dataResultado = conversor.obtenerDatos(json, Resultado.class);
+
+
         String busqueda = "Great Expectation";
         Optional<DatosLibro> dLibro = dataResultado.libroresultado().stream()
                .filter(d-> d.titulo().toUpperCase().contains(busqueda.toUpperCase()))
@@ -53,9 +65,12 @@ public class Principal {
            System.out.println("Autor existe "+ dAutor);
            datosAutor = dAutor.get();
            autor = new Autor(datosAutor);
-            List<Autor> listaAutor = Arrays.asList(autor);
-            libro.setAutor(listaAutor);
-            System.out.println(libro.getAutor().getFirst().getNombre());
+           autorRepository.save(autor);
+           libro.setAutor(autor);
+           libroRepository.save(libro);
+           // List<Autor> listaAutor = Arrays.asList(autor);
+            //libro.setAutor(listaAutor);
+            //System.out.println(libro.getAutor().getFirst().getNombre());
 
        }
        else{
