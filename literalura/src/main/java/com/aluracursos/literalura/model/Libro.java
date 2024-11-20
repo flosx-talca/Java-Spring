@@ -27,6 +27,14 @@ public class Libro {
         this.numeroDescargas = datosLibro.numeroDescargas();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }

@@ -29,6 +29,13 @@ public class Autor {
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
     public String getNombre() {
@@ -54,6 +61,7 @@ public class Autor {
     public void setFechaDefuncion(Integer fechaDefuncion) {
         this.fechaDefuncion = fechaDefuncion;
     }
+
 
     public String toString() {
         return (" Nombre: %s Fecha Nac: %d Fecha Fall: %d".formatted(nombre, fechaNacimiento, fechaNacimiento));
