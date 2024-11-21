@@ -18,7 +18,7 @@ public class Principal {
     private Libro libro;
     private DatosAutor datosAutor;
     private Autor autor;
-    private final String URL_BASE = "https://gutendex.com/books/?search=dickens%20great";
+    private final String URL_BASE = "https://gutendex.com/books/?search=";
     private ConvierteDatos conversor = new ConvierteDatos();
     private Resultado dataResultado;
 
@@ -60,57 +60,58 @@ public class Principal {
 
 
 
-        System.out.println(URL_BASE);
-        var json = consumoApi.obtenerDatos(URL_BASE);
-        System.out.println("Prueba de JSON: "+json);
 
-        dataResultado = conversor.obtenerDatos(json, Resultado.class);
-
-
-        String busqueda = "Great Expectation";
-        Optional<DatosLibro> dLibro = dataResultado.libroresultado().stream()
-               .filter(d-> d.titulo().toUpperCase().contains(busqueda.toUpperCase()))
-               .findFirst();
-       if(dLibro.isPresent()){
-           System.out.println("Libro encontrado");
-           System.out.println(dLibro.get().autor().getFirst());
-           datosLibro = dLibro.get();
-           libro = new Libro(datosLibro);
-
-       }
-       else{
-           System.out.println("No encontrado");
-       }
-
-
-
-        Optional<DatosAutor> dAutor = datosLibro.autor().stream().findFirst();
-
-       if (dAutor.isPresent()){
-           System.out.println("Autor existe "+ dAutor);
-           datosAutor = dAutor.get();
-           autor = new Autor(datosAutor);
-           autorRepository.save(autor);
-           libro.setAutor(autor);
-           libroRepository.save(libro);
-           List<Libro> libro2 = Arrays.asList(libro);
-           //autor.setLibro(libro2);
-           // List<Autor> listaAutor = Arrays.asList(autor);
-            //libro.setAutor(listaAutor);
-            //System.out.println(libro.getAutor().getFirst().getNombre());
-
-       }
-       else{
-           System.out.println("Autor no existe");
-       }
-
-        System.out.println(libro);
 
         //System.out.println(libro.getAutor().getFirst());
 
    }
 
    public void BuscarLibroPorTitulo(){
+       String libroPorTeclado = solicitaLibroTeclado();
+       System.out.println(libroPorTeclado);
+
+       var json = consumoApi.obtenerDatos(URL_BASE+libroPorTeclado.replace(" ", "%20"));
+       //System.out.println(URL_BASE);
+       System.out.println("Prueba de JSON: " + json);
+       dataResultado = conversor.obtenerDatos(json, Resultado.class);
+       //String libroPorTeclado = "Great Expectation";
+       Optional<DatosLibro> dLibro = dataResultado.libroresultado().stream()
+               .filter(d -> d.titulo().toUpperCase().contains(libroPorTeclado.toUpperCase()))
+               //.filter(d -> d.titulo().equalsIgnoreCase(libroPorTeclado))
+               .findFirst();
+       if(dLibro.isPresent()) {
+           //System.out.println("Libro encontrado");
+           //System.out.println(dLibro.get().autor().getFirst());
+           datosLibro = dLibro.get();
+           libro = new Libro(datosLibro);
+
+           Optional<DatosAutor> dAutor = datosLibro.autor().stream().findFirst();
+           if (dAutor.isPresent()) {
+               System.out.println("Autor existe " + dAutor);
+               datosAutor = dAutor.get();
+               autor = new Autor(datosAutor);
+               autorRepository.save(autor);
+               libro.setAutor(autor);
+               libroRepository.save(libro);
+               List<Libro> libro2 = Arrays.asList(libro);
+               //autor.setLibro(libro2);
+               // List<Autor> listaAutor = Arrays.asList(autor);
+               //libro.setAutor(listaAutor);
+               //System.out.println(libro.getAutor().getFirst().getNombre());
+
+           } else {
+               System.out.println("Autor no existe");
+           }
+
+           System.out.println(libro);
+
+
+
+       } else {
+           System.out.println("No encontrado");
+       }
+
+
 
 
    }
@@ -140,6 +141,28 @@ public class Principal {
         }
         teclado.nextLine();
         return op;
+
+    }
+
+    public String solicitaLibroTeclado() {
+        String solicitaLibro="";
+        while (solicitaLibro.isEmpty()) {
+            try {
+                System.out.print("\nIngrese nombre del libro: ");
+                solicitaLibro = teclado.nextLine();
+                if (solicitaLibro.isEmpty()) {
+                    throw new IllegalArgumentException("La entrada no puede estar vacía, ingrese nuevamente");
+                }
+
+
+            } catch (Exception e) {
+                System.out.println("Debe ingresar un dato valido 1 al 5: " + e);
+
+            }
+        }
+        //teclado.nextLine();
+        return solicitaLibro;
+
 
     }
 
