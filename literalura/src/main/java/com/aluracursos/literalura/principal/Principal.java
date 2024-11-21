@@ -5,16 +5,15 @@ import com.aluracursos.literalura.repository.LibroRepository;
 import com.aluracursos.literalura.service.ConsumoApi;
 import com.aluracursos.literalura.service.ConvierteDatos;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-import static java.util.Locale.filter;
+
 
 public class Principal {
     private final LibroRepository libroRepository;
     private final AutorRepository autorRepository;
-    private Scanner teclado = new Scanner(System.in);
-    private ConsumoApi consumoApi = new ConsumoApi();
+    private final Scanner teclado = new Scanner(System.in);
+    private final ConsumoApi consumoApi = new ConsumoApi();
     private DatosLibro datosLibro;
     private Libro libro;
     private DatosAutor datosAutor;
@@ -29,13 +28,38 @@ public class Principal {
             this.autorRepository = autorRepository;
     }
 
-    // para la interfaz SerieRepositoryn (Inyeccion de dependencia) lo crea intelli
+
+    public void inicioApp(){
+        Integer opcionUsuario=0;
+        do{
+            mostrarMenu();
+            opcionUsuario = solicitaOpccionTeclado();
+            switch (opcionUsuario){
+                case 1:
+                    BuscarLibroPorTitulo();
+                    break;
+                case 2:
+                    System.out.println("1");
+                    break;
+                case 3:
+                    System.out.println("1");
+                    break;
+                case 4:
+                    System.out.println("1");
+                    break;
+                case 5:
+                    System.out.println("1");
+                    break;
+                default:
+                    break;
+            }
+
+        }while (opcionUsuario != 0);
 
 
 
 
 
-    public void muestraElMenu(){
         System.out.println(URL_BASE);
         var json = consumoApi.obtenerDatos(URL_BASE);
         System.out.println("Prueba de JSON: "+json);
@@ -84,56 +108,39 @@ public class Principal {
 
         //System.out.println(libro.getAutor().getFirst());
 
+   }
+
+   public void BuscarLibroPorTitulo(){
 
 
+   }
+
+   public void mostrarMenu(){
+        String menu = """
+                (1) - Buscar libro por titulo
+                (2) - Listar Libros registrados
+                (3) - Listar Autores registrados
+                (4) - Listar Autores vivos determinados año
+                (5) - Listar Libro por idioma
+                (0) - Salir""";
+       System.out.println(menu);
+   }
+
+    public Integer solicitaOpccionTeclado() {
+        Integer op = 999;
+
+        try {
+            System.out.print("\nIngresa la opción: ");
+            op = teclado.nextInt();
 
 
+        } catch (Exception e) {
+             System.out.println("Debe ingresar un dato valido 1 al 5: " + e);
 
-
-
-
-
-/*
-        //System.out.println(dataResultado.libroresultado().stream().map(e-> new DatosLibro(e.titulo(),e.numeroDescargas())));
-        List <DatosLibro> libro  =  dataResultado.libroresultado().stream()
-        .map(e-> new DatosLibro(e.titulo(),e.autor(), e.numeroDescargas()))
-                .collect(Collectors.toList());
-        System.out.println("HOLA");
-        System.out.println(libro.getLast());
-        //
-
-        List<DatosAutor> autor = libro.stream().flatMap(a->a.autor().stream()
-
-        ).collect(Collectors.toList());
-
-        System.out.println("Probadno stream con autor"+autor.getFirst());
-
-        // Optional<List<Autor>> datosAutorOptional = libro.stream().flatMap(a->a.autor().stream())
-         //       .filter(e-> e.nombre().contains(busqueda.toUpperCase())).collect(Collectors.toList()));
-
-        Autor autor2 = new Autor(autor.getFirst());
-
-        System.out.println("Veamos la clase"+autor2.getNombre()+" "+autor2.getFechaNacimiento());
-
-
-
-        //System.out.println(autor);
-
-        */
-
-       /* List <Episodio> episodios = temporadas.stream()
-                .flatMap(d->d.episodios().stream()
-                        .map(e-> new Episodio(d.numero(),e)))
-                .collect(Collectors.toList());*/
-
-
-        //System.out.println(datoLibro);
-        /*
-        //var json = consumoApi.obtenerDatos(URL_BASE + nombreSerie.replace(" ", "+") + API_KEY);
-        String  menu ="""
-                1 - Hola mundos
-                """;
-        System.out.println(menu);*/
+        }
+        teclado.nextLine();
+        return op;
 
     }
+
 }

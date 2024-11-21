@@ -66,6 +66,11 @@ public class Autor {
         return libro;
     }
 
+    @Override
+    public String toString() {
+        return "Nombre: "+ this.nombre;
+    }
+
   /*  public void setLibro(List<Libro> libro) {
         this.libro = libro;
     }
