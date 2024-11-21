@@ -55,15 +55,6 @@ public class Principal {
             }
 
         }while (opcionUsuario != 0);
-
-
-
-
-
-
-
-        //System.out.println(libro.getAutor().getFirst());
-
    }
 
    public void BuscarLibroPorTitulo(){
