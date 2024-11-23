@@ -3,6 +3,7 @@ import com.aluracursos.literalura.repository.AutorRepository;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Entity
@@ -25,9 +26,10 @@ public class Autor {
     public Autor(){}
     public Autor(DatosAutor datosAutor){
         this.nombre = datosAutor.nombre();
-        this.fechaNacimiento = datosAutor.fechaNacimiento();
-        this.fechaDefuncion = datosAutor.fechaDefuncion();
-
+        //this.fechaNacimiento = Optional.of(datosAutor.fechaNacimiento()).orElse(0);
+        //this.fechaDefuncion = Optional.of(datosAutor.fechaDefuncion()).orElse(0);
+        this.fechaNacimiento=datosAutor.fechaNacimiento();
+        this.fechaDefuncion=datosAutor.fechaDefuncion();
     }
 
 
@@ -70,7 +72,8 @@ public class Autor {
 
     @Override
     public String toString() {
-        return "Nombre: "+ this.nombre;
+
+        return "Nombre: "+ this.nombre +"\nAño Nac.: "+ this.fechaNacimiento+ "\nAño Falle.: "+ this.fechaDefuncion+"\n";
     }
 
   /*  public void setLibro(List<Libro> libro) {

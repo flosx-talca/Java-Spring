@@ -20,7 +20,7 @@ public class ConsumoApi {
         try {
             response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.toString());
+            //System.out.println(response.toString());
         } catch (ConnectException e){
             throw new RuntimeException(e);
         } catch (IOException e) {

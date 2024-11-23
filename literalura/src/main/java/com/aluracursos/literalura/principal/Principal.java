@@ -43,10 +43,10 @@ public class Principal {
                     listarLibrosRegistrados();
                     break;
                 case 3:
-                    System.out.println("3");
+                    listarAutoresRegistrados();
                     break;
                 case 4:
-                    System.out.println("4");
+                    listarAutoresVivos();
                     break;
                 case 5:
                     System.out.println("5");
@@ -116,6 +116,7 @@ public class Principal {
    public void mostrarMenu(){
         String menu = """
                 ------------------------------
+                    MANTENEDOR API LIBROS
                 (1) - Buscar libro por titulo
                 (2) - Listar Libros registrados
                 (3) - Listar Autores registrados
@@ -165,4 +166,20 @@ public class Principal {
         librosRegistrados.forEach(System.out::println);
 
     }
+
+    public void listarAutoresRegistrados(){
+
+        List<Autor> autoresRegistrados = autorRepository.findAll();
+        autoresRegistrados.forEach(System.out::println);
+
+    }
+
+    public void listarAutoresVivos(){
+        List<Autor> autoresVivos  = autorRepository.buscaAutorVivoanio(2024);
+        autoresVivos.forEach(System.out::println);
+    }
+
+
+
+
 }
