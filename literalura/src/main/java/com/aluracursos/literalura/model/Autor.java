@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+
 @Entity
 @Table(name = "autores")
 public class Autor {
@@ -11,6 +12,7 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+    @Column(unique = true)
     private String nombre;
     private Integer fechaNacimiento;
     private Integer fechaDefuncion;
