@@ -74,8 +74,65 @@ public class Principal {
            //System.out.println("Libro encontrado");
            //System.out.println(dLibro.get().autor().getFirst());
            datosLibro = dLibro.get();
-           libro = new Libro(datosLibro);
+           Optional <Libro> libroBuscadoBD = Optional.ofNullable(libroRepository.findByTitulo(datosLibro.titulo()));
+           if(libroBuscadoBD.isEmpty()){ //VACIO BD
+               //libro = dlibro.get();
+               libro = new Libro(datosLibro);
+               //System.out.println(libro.getTitulo()+ libro.getAutor() +" MOSTRADOS");
+               Optional<DatosAutor> dAutor = datosLibro.autor().stream().findFirst();
 
+               if (dAutor.isPresent()) {
+                   datosAutor = dAutor.get();
+                   Optional<Autor> autorBuscadoBD= Optional.ofNullable(autorRepository.findByNombre(datosAutor.nombre()));
+                   if(autorBuscadoBD.isEmpty()){ //VACIO BD
+                       autor = new Autor(datosAutor);
+                       autorRepository.save(autor);
+                       libro.setAutor(autor);
+                       libroRepository.save(libro);
+
+
+                   }
+                   else{
+
+                       System.out.println("El Autor existe en la Base de Datos");
+                       autor = autorBuscadoBD.get();
+                       libro.setAutor(autor);
+                       libroRepository.save(libro);
+                   }
+
+
+
+
+
+                   System.out.println("Autor existe " + dAutor);
+                   //datosAutor = dAutor.get();
+                   //autor = new Autor(datosAutor);
+                   //autorRepository.save(autor);
+                   //libro.setAutor(autor);
+                  // libroRepository.save(libro);
+                   //List<Libro> libro2 = Arrays.asList(libro);
+                   //autor.setLibro(libro2);
+                   // List<Autor> listaAutor = Arrays.asList(autor);
+                   //libro.setAutor(listaAutor);
+                   //System.out.println(libro.getAutor().getFirst().getNombre());
+
+               } else {
+                   System.out.println("Autor no existe en la API");
+               }
+
+
+
+
+
+
+
+           }
+           else{
+               System.out.println("EXISTE EL LIBRO EN LA BASE DE DATOS");
+           }
+
+          // libro = new Libro(datosLibro);
+/*
            Optional<DatosAutor> dAutor = datosLibro.autor().stream().findFirst();
            if (dAutor.isPresent()) {
                System.out.println("Autor existe " + dAutor);
@@ -94,12 +151,12 @@ public class Principal {
                System.out.println("Autor no existe");
            }
 
-           System.out.println(libro);
+           System.out.println(libro);*/
 
 
 
        } else {
-           System.out.println("No encontrado");
+           System.out.println("Libro No encontrado en la API");
        }
 
 
@@ -109,12 +166,15 @@ public class Principal {
 
    public void mostrarMenu(){
         String menu = """
+                ------------------------------
                 (1) - Buscar libro por titulo
                 (2) - Listar Libros registrados
                 (3) - Listar Autores registrados
                 (4) - Listar Autores vivos determinados año
                 (5) - Listar Libro por idioma
-                (0) - Salir""";
+                (0) - Salir
+                -------------------------------
+                """;
        System.out.println(menu);
    }
 
