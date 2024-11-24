@@ -73,16 +73,9 @@ public class Autor {
     @Override
     public String toString() {
 
-        return "Nombre: "+ this.nombre +"\nAño Nac.: "+ this.fechaNacimiento+ "\nAño Falle.: "+ this.fechaDefuncion+"\n";
+        return "Nombre: "+ this.nombre +"\nAño Nac.: "+ this.fechaNacimiento+ "\nAño Falle.: "+ this.fechaDefuncion;
     }
 
-  /*  public void setLibro(List<Libro> libro) {
-        this.libro = libro;
-    }
-
-    public String toString() {
-        return (" Nombre: %s Fecha Nac: %d Fecha Fall: %d".formatted(nombre, fechaNacimiento, fechaNacimiento));
-    }*/
 
 }
 

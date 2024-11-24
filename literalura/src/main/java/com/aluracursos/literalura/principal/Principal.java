@@ -5,7 +5,9 @@ import com.aluracursos.literalura.repository.LibroRepository;
 import com.aluracursos.literalura.service.ConsumoApi;
 import com.aluracursos.literalura.service.ConvierteDatos;
 
+import javax.swing.text.Element;
 import java.util.*;
+import java.util.jar.JarOutputStream;
 
 public class Principal {
 
@@ -29,11 +31,12 @@ public class Principal {
     }
 
     public void inicioApp(){
-
+        String mensaje1 = "\nIngresa la opción: ";
+        String mensaje2 = "Debe ingresar un dato valido 1 al 5:";
         int opcionUsuario;
         do{
             mostrarMenu();
-            opcionUsuario = solicitaOpccionTeclado();
+            opcionUsuario = solicitaOpcionTeclado(mensaje1, mensaje2);
             switch (opcionUsuario){
 
                 case 1:
@@ -49,7 +52,7 @@ public class Principal {
                     listarAutoresVivos();
                     break;
                 case 5:
-                    System.out.println("5");
+                    listarLibrosPorIdioma();
                     break;
                 default:
                     break;
@@ -127,15 +130,15 @@ public class Principal {
        System.out.println(menu);
    }
 
-    public Integer solicitaOpccionTeclado() {
+    public Integer solicitaOpcionTeclado(String mensaje1, String mensaje2) {
         int op=999;
 
         try {
-            System.out.print("\nIngresa la opción: ");
+            System.out.print(mensaje1);
             op = teclado.nextInt();
 
         } catch (Exception e) {
-             System.out.println("Debe ingresar un dato valido 1 al 5: " + e);
+             System.out.println(mensaje2 + e);
 
         }
         teclado.nextLine();
@@ -163,6 +166,7 @@ public class Principal {
     public void listarLibrosRegistrados(){
 
         List<Libro> librosRegistrados = libroRepository.findAll();
+        System.out.println("Total libros en la Base de Datos: "+ librosRegistrados.size());
         librosRegistrados.forEach(System.out::println);
 
     }
@@ -170,13 +174,69 @@ public class Principal {
     public void listarAutoresRegistrados(){
 
         List<Autor> autoresRegistrados = autorRepository.findAll();
+        System.out.println("Total autores encontrados: "+autoresRegistrados.size());
         autoresRegistrados.forEach(System.out::println);
 
     }
 
     public void listarAutoresVivos(){
-        List<Autor> autoresVivos  = autorRepository.buscaAutorVivoanio(2024);
-        autoresVivos.forEach(System.out::println);
+        String mensaje1 = "\nIngrese año, para ver si autor estaba vivo: ";
+        String mensaje2 = "Año inválido";
+
+       // System.out.println("Ingrese año, para ver si autor estaba vivo");
+        int anio = solicitaOpcionTeclado(mensaje1, mensaje2);
+        //anio =  Integer.parseInt(teclado.next());
+        List<Autor> autoresVivos  = autorRepository.buscaAutorVivoanio(anio);
+        if (autoresVivos.isEmpty()){
+            System.out.println("No hay autores vivos en año especificado\n");
+        }
+        else{
+            System.out.println("Total autores encontrados: "+autoresVivos.size());
+            autoresVivos.forEach(System.out::println);
+        }
+
+    }
+    public void listarLibrosPorIdioma(){
+        String idioma = "*";
+        String mensaje1 = """
+                    ------------------------------
+                    IDIOMAS LIBROS (ingrese 1 al 4)
+                    (1) -> es - Español
+                    (2) -> en - Inglés
+                    (3) -> fr - Francés
+                    (4) -> pt - Portugués
+                    """;
+        String mensaje2 = "Opcion de idioma incorrecta\n";
+        int opcion = solicitaOpcionTeclado(mensaje1,mensaje2);
+        switch (opcion){
+            case 1:
+                idioma = "es";
+                break;
+            case 2:
+                idioma = "en";
+                break;
+            case 3:
+                idioma = "fr";
+                break;
+            case 4:
+                idioma = "pt";
+                break;
+            default:
+                System.out.println("Opcion no encontrada");
+                break;
+
+        }
+       // Libro idioma2 = libro;
+        List<Libro> libroIdioma = libroRepository.buscaLibroPorIdioma(idioma);
+        if(libroIdioma.isEmpty()){
+            System.out.println("libros no encontrados");
+        }
+        else{
+            System.out.println("Total Libros encontrados: "+ libroIdioma.size());
+            libroIdioma.forEach(System.out::println);
+        }
+
+
     }
 
 
