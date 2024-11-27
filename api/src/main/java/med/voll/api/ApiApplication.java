@@ -28,4 +28,6 @@ public class ApiApplication {
 }
 	*/
 
+	// delete from flyway_schema_history where success = 0;  cuando no se detiene el proyecto al ahacer un migration
+
 }
