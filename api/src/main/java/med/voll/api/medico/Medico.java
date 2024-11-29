@@ -10,11 +10,12 @@ import med.voll.api.direccion.Direccion;
 
 @Table(name="medicos")
 @Entity(name = "Medico")
-@Getter // genera Getters al compilar lombok
 @NoArgsConstructor //genera constructor default lombok
 @AllArgsConstructor //genera constructor con todos los argumentos
+@Getter // genera getters
 @EqualsAndHashCode(of ="id") //usa parametro id para la comparacion, en este caso de medicos
 public class Medico {
+
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
