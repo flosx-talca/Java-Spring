@@ -29,5 +29,5 @@ public class ApiApplication {
 	*/
 
 	// delete from flyway_schema_history where success = 0;  cuando no se detiene el proyecto al ahacer un migration
-
+	// http://localhost:8080/medico?size=10&page=0&sort=nombre
 }
