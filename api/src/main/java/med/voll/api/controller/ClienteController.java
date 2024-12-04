@@ -1,10 +1,7 @@
 package med.voll.api.controller;
 
 
-import med.voll.api.domain.cliente.Cliente;
-import med.voll.api.domain.cliente.ClienteRepository;
-import med.voll.api.domain.cliente.DatoListadoCliente;
-import med.voll.api.domain.cliente.DatosRegistroCliente;
+import med.voll.api.domain.cliente.*;
 import med.voll.api.domain.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +25,17 @@ public class ClienteController {
     public List<DatoListadoCliente>   listadoCliente(){
         List<Cliente> cliente = clienteRepository.findAll();
         return (cliente.stream().map(DatoListadoCliente::new).toList());
+
+
+    }
+
+    @PutMapping
+
+    public void modificarCliente(@RequestBody DatosActualizarCliente datosActualizarCliente){
+
+        Cliente cliente = clienteRepository.getReferenceById(datosActualizarCliente.id());
+        
+
 
 
     }
