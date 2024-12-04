@@ -34,8 +34,8 @@ public class ClienteController {
     public void modificarCliente(@RequestBody DatosActualizarCliente datosActualizarCliente){
 
         Cliente cliente = clienteRepository.getReferenceById(datosActualizarCliente.id());
-        
-
+        cliente.actualizarDatos(datosActualizarCliente);
+        clienteRepository.save(cliente);
 
 
     }

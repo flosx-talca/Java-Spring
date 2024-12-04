@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.domain.direccion.DatosDireccion;
 import med.voll.api.domain.direccion.Direccion;
+import med.voll.api.domain.medico.DatosActualizarMedico;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity (name="Cliente")
@@ -35,6 +36,18 @@ public class Cliente {
         this.edad = datosRegistroCliente.edad();
         this.direccion = new Direccion(datosRegistroCliente.direccion());
         this.activo = true;
+    }
+
+    public void actualizarDatos(DatosActualizarCliente datosActualizarCliente){
+        if (datosActualizarCliente.nombre()!=null){
+            this.nombre = datosActualizarCliente.nombre();
+
+        }
+        if(datosActualizarCliente.edad()!=null){
+            this.edad = datosActualizarCliente.edad();
+
+        }
+
     }
 
 }
