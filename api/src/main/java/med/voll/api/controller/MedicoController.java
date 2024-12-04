@@ -27,7 +27,7 @@ public class MedicoController {
        Medico medico =  medicoRepository.save(new Medico(datosRegistroMedico));
        DatosRespuestaMedico datosRespuestaMedico = new DatosRespuestaMedico(medico.getId(),medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getEspecialidad().toString(),
                new DatosDireccion(medico.getDireccion().getCalle(),medico.getDireccion().getNumero(),medico.getDireccion().getCiudad(), medico.getDireccion().getComplemento(),
-                       medico.getDireccion().getDistrito(),medico.getDireccion().getComplemento()));
+                       medico.getDireccion().getDistrito()));
         //return 201 Created
         //URL donde encontrar medico
         //http://localhost:8080/medico/xx
@@ -55,7 +55,7 @@ public class MedicoController {
         medico.actualizarDatos(datosActualizarMedico);
         return ResponseEntity.ok(new DatosRespuestaMedico(medico.getId(),medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getEspecialidad().toString(),
         new DatosDireccion(medico.getDireccion().getCalle(),medico.getDireccion().getNumero(),medico.getDireccion().getCiudad(), medico.getDireccion().getComplemento(),
-                medico.getDireccion().getDistrito(),medico.getDireccion().getComplemento())));
+                medico.getDireccion().getDistrito())));
 
 
     }
@@ -86,7 +86,7 @@ public class MedicoController {
         Medico medico = medicoRepository.getReferenceById(id);
         var datosMedico = new DatosRespuestaMedico(medico.getId(),medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getEspecialidad().toString(),
                 new DatosDireccion(medico.getDireccion().getCalle(),medico.getDireccion().getNumero(),medico.getDireccion().getCiudad(), medico.getDireccion().getComplemento(),
-                        medico.getDireccion().getDistrito(),medico.getDireccion().getComplemento()));
+                        medico.getDireccion().getDistrito()));
         return ResponseEntity.ok(datosMedico);
     }
 
