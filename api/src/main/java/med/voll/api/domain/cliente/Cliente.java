@@ -41,13 +41,20 @@ public class Cliente {
     public void actualizarDatos(DatosActualizarCliente datosActualizarCliente){
         if (datosActualizarCliente.nombre()!=null){
             this.nombre = datosActualizarCliente.nombre();
-
         }
         if(datosActualizarCliente.edad()!=null){
             this.edad = datosActualizarCliente.edad();
 
         }
 
+        if (datosActualizarCliente.direccion() != null){
+            this.direccion = direccion.actualizarDatos(datosActualizarCliente.direccion());
+        }
+
+    }
+
+    public void desactivarCliente() {
+        this.activo=false;
     }
 
 }
