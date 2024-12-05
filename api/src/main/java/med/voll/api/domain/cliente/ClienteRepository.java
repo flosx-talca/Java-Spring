@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-   // Page<Medico> findByActivoTrue(Pageable pagiancion);
-     List<Cliente> findByActivoTrue();
+    Page<Cliente> findByActivoTrue(Pageable paginacion);
+     //List<Cliente> findByActivoTrue();
 }

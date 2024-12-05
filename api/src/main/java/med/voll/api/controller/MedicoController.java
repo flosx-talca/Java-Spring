@@ -57,7 +57,6 @@ public class MedicoController {
         new DatosDireccion(medico.getDireccion().getCalle(),medico.getDireccion().getNumero(),medico.getDireccion().getCiudad(), medico.getDireccion().getComplemento(),
                 medico.getDireccion().getDistrito())));
 
-
     }
 
 
