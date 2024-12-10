@@ -1,6 +1,6 @@
 package med.voll.api.infra.security;
 
-import jakarta.servlet.Filter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,10 +11,14 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 // Esta clase es para realizar configuracion en el paquete de seguridad de spring y no se escriben en el archivo propietres
+
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfigurations {
 
+public class SecurityConfiguration{
+
+   private  SecurityFilter securityFilter;
 
 
     @Bean
@@ -25,8 +29,8 @@ public class SecurityConfigurations {
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
                     req.anyRequest().authenticated();
                 })
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                //.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-        }
+    }
 
 }
