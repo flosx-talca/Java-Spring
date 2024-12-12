@@ -38,7 +38,10 @@ public class TokenService {
     }
 
     public String getSubject(String token){
-
+        System.out.println("TOKEN EN GETSUBERT METODO: "+ token);
+        if(token == null){
+            throw new RuntimeException();
+        }
         //String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCJ9.AbIJTDMFc7yUa5MhvcP03nJPyCPzZtQcGEp-zWfOkEE";
         DecodedJWT verifier = null;
         try {
