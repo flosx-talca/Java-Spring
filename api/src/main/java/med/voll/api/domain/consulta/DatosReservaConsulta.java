@@ -16,8 +16,9 @@ public record DatosReservaConsulta(
 
         @NotNull
         @Future
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm") //le indicamos a spring que queremos la fecha a lo chileno
         LocalDateTime fecha,
+        //@JsonFormat(pattern = "yyyy-MM-ddTHH:mm") //le indicamos a spring que queremos la fecha a lo chileno
+
 
         Especialidad especialidad
 

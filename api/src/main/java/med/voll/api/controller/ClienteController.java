@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
+
     @Autowired
     private ClienteRepository clienteRepository;
 

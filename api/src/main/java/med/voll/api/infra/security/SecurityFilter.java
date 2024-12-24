@@ -40,6 +40,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             //System.out.println(token);
             //System.out.println(tokenService.getSubject(token));
             var nombreUsuario = tokenService.getSubject(token); //extraeos el username
+           // System.out.println(nombreUsuario);
             if( nombreUsuario !=null){
                 System.out.println("token valido");
                 var usuario = usuarioRepository.findByLogin(nombreUsuario);

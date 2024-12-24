@@ -52,11 +52,12 @@ public class TokenService {
                     .build()
                     .verify(token);
             verifier.getSubject();
-
+            System.out.println(verifier);
            // decodedJWT = verifier.verify(token);
         } catch (JWTVerificationException exception){
             // Invalid signature/claims
         }
+       // assert verifier != null;
         if (verifier.getSubject() == null){
             throw new RuntimeException("verifier invalido");
         }
