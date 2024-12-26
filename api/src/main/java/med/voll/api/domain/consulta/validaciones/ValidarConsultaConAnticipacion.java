@@ -17,10 +17,14 @@ public class ValidarConsultaConAnticipacion  implements  ValidadorDeConsultas{
 
     public void validar(DatosReservaConsulta datos){
 
-     var fechaConsulta = datos.fecha();
-       var ahora = LocalDate.now();
+     LocalDateTime  fechaConsulta = datos.fecha();
+
+       // System.out.println(fechaConsulta);
+       var ahora = LocalDateTime.now();
 
        var diferenciaEnMinutos = Duration.between(ahora, fechaConsulta).toMinutes();
+
+       // System.out.println("MINUTOS: "+diferenciaEnMinutos);
 
        if(diferenciaEnMinutos<30){
 

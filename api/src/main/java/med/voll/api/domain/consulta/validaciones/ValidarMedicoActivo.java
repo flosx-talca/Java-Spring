@@ -17,8 +17,9 @@ public class ValidarMedicoActivo implements  ValidadorDeConsultas{
         if(datos.idMedico() == null){
             return;
         }
-
-        var  medicoEstaActivo = repository.findActivoById(datos.idMedico());
+        System.out.println("Datos ID MEDICO: "+ datos.idMedico());
+        var medicoEstaActivo = repository.findActivoById(datos.idMedico());
+        System.out.println("Medico activo: " + medicoEstaActivo);
         if (!medicoEstaActivo){
             throw new ValidacionException("No se puede reservar Medico inactivo");
 

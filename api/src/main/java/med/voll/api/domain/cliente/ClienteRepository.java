@@ -13,14 +13,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Page<Cliente> findByActivoTrue(Pageable paginacion);
 
 
-    /*@Query("""
+    @Query("""
             Select c.activo
-            From cliente c
+            From Cliente c
             Where
-            c.ClienteId = :idCliente
-            """)*/
-
-
+            c.id = :idCliente
+            """)
     boolean findActivoById(@NotNull Long idCliente);
     //List<Cliente> findByActivoTrue();
 
