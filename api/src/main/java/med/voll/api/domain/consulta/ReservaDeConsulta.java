@@ -31,7 +31,7 @@ public class ReservaDeConsulta {
 
 
 
-        public void reservar(DatosReservaConsulta datos){
+        public DatosDetalleConsulta reservar(DatosReservaConsulta datos){
 
 
             if(!clienteRepository.existsById(datos.idCliente())){
@@ -54,11 +54,16 @@ public class ReservaDeConsulta {
             //var medico = medicoRepository.findById(datos.idMedico()).get();
             var medico = elegirMedico(datos);
 
+            if( medico == null){
+                throw new ValidacionException("No existe Medico Disponible en ese horario");
+            }
+
             var cliente = clienteRepository.findById(datos.idCliente()).get();
 
             var consulta = new Consulta(null,  medico, cliente, datos.fecha(), null);
 
             consultaRepository.save(consulta);
+            return new DatosDetalleConsulta(consulta);
 
 
 
