@@ -3,10 +3,10 @@ package med.voll.api.domain.consulta;
 import jakarta.validation.Valid;
 import med.voll.api.domain.ValidacionException;
 import med.voll.api.domain.cliente.ClienteRepository;
-import med.voll.api.domain.consulta.validaciones.ValidadorDeConsultas;
+import med.voll.api.domain.consulta.validaciones.cancelacion.ValidadorCancelamientoDeConsulta;
+import med.voll.api.domain.consulta.validaciones.reserva.ValidadorDeConsultas;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +26,9 @@ public class ReservaDeConsulta {
 //
       @Autowired
     private List<ValidadorDeConsultas> validadores;
+
+    @Autowired
+    private List<ValidadorCancelamientoDeConsulta> validadoresCancelamiento;
 
 
 
@@ -91,6 +94,8 @@ public class ReservaDeConsulta {
                  throw new ValidacionException("ID de consulta no existe");
 
             }
+            validadoresCancelamiento.forEach(v -> v.validar(datos));
+
             var consulta = consultaRepository.getReferenceById(datos.idConsulta());
             consulta.cancelar(datos.motivo());
 

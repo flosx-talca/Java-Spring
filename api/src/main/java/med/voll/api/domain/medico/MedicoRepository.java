@@ -16,7 +16,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     Page<Medico> findByActivoTrue(Pageable pagiancion);
 
 
-    @Query("""
+   /* @Query("""
             Select m from Medico m
             Where
             m.activo = true
@@ -30,8 +30,25 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
             Order by rand()
             limit 1
             
-            """)
+            """)*/
 
+    @Query("""
+            select m from Medico m
+            where
+            m.activo = true
+            and
+            m.especialidad = :especialidad
+            and
+            m.id not in(
+                select c.medico.id from Consulta c
+                where
+                c.fecha = :fecha
+            and
+                c.motivoCancelamiento is null
+            )
+            order by rand()
+            limit 1
+""")
     Medico elegirMedicoAleatorioDisponibleEnLaFecha(Especialidad especialidad, @NotNull @Future LocalDateTime fecha);
 
 

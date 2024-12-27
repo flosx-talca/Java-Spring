@@ -1,11 +1,9 @@
-package med.voll.api.domain.consulta.validaciones;
+package med.voll.api.domain.consulta.validaciones.reserva;
 
 import med.voll.api.domain.ValidacionException;
 import med.voll.api.domain.cliente.ClienteRepository;
 import med.voll.api.domain.consulta.DatosReservaConsulta;
-import org.aspectj.apache.bcel.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
 public class ValidarPacienteInactivo implements  ValidadorDeConsultas{

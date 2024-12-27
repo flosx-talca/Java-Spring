@@ -21,5 +21,7 @@ public interface ConsultaRepository  extends JpaRepository<Consulta, Long> {
             c.fecha = :fecha 
             
             """)*/
-    boolean existsByMedicoIdAndFecha(Long idMedico, @NotNull @Future LocalDateTime fecha);
+
+    boolean existsByMedicoIdAndFechaAndMotivoCancelamientoIsNull(Long idMedico, LocalDateTime fecha);
+    //boolean existsByMedicoIdAndFecha(Long idMedico, @NotNull @Future LocalDateTime fecha);
 }

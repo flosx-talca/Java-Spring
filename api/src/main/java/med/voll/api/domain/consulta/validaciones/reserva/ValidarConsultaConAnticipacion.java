@@ -1,18 +1,15 @@
-package med.voll.api.domain.consulta.validaciones;
+package med.voll.api.domain.consulta.validaciones.reserva;
 
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotNull;
 import med.voll.api.domain.ValidacionException;
 import med.voll.api.domain.consulta.DatosReservaConsulta;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Component // Se podria Usaar service, pero se utilizara @component para que spring lo reconozca
+//@Component // Se podria Usaar service, pero se utilizara @component para que spring lo reconozca
+@Component("ValidadorConsultaConAnticipacionReserva")
+
 public class ValidarConsultaConAnticipacion  implements  ValidadorDeConsultas{
 
     public void validar(DatosReservaConsulta datos){

@@ -10,6 +10,7 @@ import med.voll.api.domain.cliente.Cliente;
 import med.voll.api.domain.medico.Medico;
 
 import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 
 @Table(name="consultas")
 @Entity(name="Consulta")
@@ -27,20 +28,19 @@ public class Consulta {
     @JoinColumn(name = "medico_id")
     private Medico medico;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     private LocalDateTime fecha;
 
-    @Column(name="motivo_cancelamiento")
+    @Column(name = "motivo_cancelamiento")
     @Enumerated(EnumType.STRING)
     private MotivoCancelamiento motivoCancelamiento;
 
-    public void cancelar(MotivoCancelamiento motivo){
+    public void cancelar(MotivoCancelamiento motivo) {
 
         this.motivoCancelamiento = motivo;
 
     }
-
 }
