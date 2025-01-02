@@ -10,7 +10,8 @@ import med.voll.api.domain.direccion.DatosDireccion;
 public record DatosRegistroMedico(
 
         @NotBlank
-        String nombre,
+
+         String nombre,
 
         @NotBlank //se usa para decir que no peude ser Blanco ni Nulo
         @Email //Tipo mail
